@@ -16,4 +16,4 @@ this function takes does not depend on what specific bytes are in these strings.
 Technically, this should work for any object that supports the read-only buffer
 interface, so it should also work for arrays.
 
-The module is written in C, for speed and predictability.
+The module is written in C, for speed and predictability. The license is Apache 2.0.
