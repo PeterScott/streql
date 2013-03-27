@@ -6,8 +6,8 @@ Sometimes you need to test strings for equality with an algorithm whose timing d
 only on the length of the strings, and not on the contents of the strings themselves. If
 one of those strings is of constant width -- an
 `HMAC <http://en.wikipedia.org/wiki/HMAC>`_, for example -- then it becomes a constant-time
-operation. This can be used to prevent some [timing side-channel
-attacks](http://en.wikipedia.org/wiki/Timing_attack>`_, such as `the critical vulnerability
+operation. This can be used to prevent some `timing side-channel
+attacks <http://en.wikipedia.org/wiki/Timing_attack>`_, such as `the critical vulnerability
 found in KeyCzar back in 2009 <http://codahale.com/a-lesson-in-timing-attacks/>`_.
 
 This module offers a single function, ``equals(x, y)``, which takes two strings ``x`` and
