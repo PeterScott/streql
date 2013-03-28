@@ -1,6 +1,8 @@
 Constant-time string comparison
 -------------------------------
 
+"!https://travis-ci.org/PeterScott/streql.png!":https://travis-ci.org/PeterScott/streql
+
 Sometimes you need to test strings for equality with an algorithm whose timing depends
 only on the length of the strings, and not on the contents of the strings themselves. If
 one of those strings is of constant width -- an
