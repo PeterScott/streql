@@ -2,7 +2,7 @@ Constant-time string comparison
 -------------------------------
 
 .. image:: https://travis-ci.org/PeterScott/streql.png
-   target: https://travis-ci.org/PeterScott/streql
+   :target: https://travis-ci.org/PeterScott/streql
 
 Sometimes you need to test strings for equality with an algorithm whose timing depends
 only on the length of the strings, and not on the contents of the strings themselves. If
