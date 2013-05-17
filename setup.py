@@ -37,4 +37,13 @@ setup(
     test_suite = 'tests',
     zip_safe = False,
     ext_modules = [Extension("streql", ["streql.c"])],
+    classifiers = [
+      'Development Status :: 5 - Production/Stable',
+      'License :: OSI Approved :: Apache Software License',
+      'Operating System :: OS Independent',
+      'Programming Language :: Python',
+      'Programming Language :: Python :: 3',
+      'Topic :: Security',
+      'Topic :: Security :: Cryptography',
+    ],
 )
