@@ -16,7 +16,7 @@ this function takes does not depend on what specific bytes are in these strings.
 are encoded with UTF-8 before being compared. This works on both Unicode and byte
 strings, in Python 2 and 3.
 
-The module is written in C, for speed and predictability. The license is Apache 2.0.
+This works with Python 2 and 3, and PyPy. The license is Apache 2.0.
 """
 
 try:
@@ -26,7 +26,7 @@ except ImportError:
 
 common = dict(
     name = 'streql',
-    version = '2.0',
+    version = '2.0.1',
     description = 'Constant-time string comparison',
     long_description = __doc__,
     author = 'Peter Scott',
@@ -40,7 +40,10 @@ common = dict(
       'License :: OSI Approved :: Apache Software License',
       'Operating System :: OS Independent',
       'Programming Language :: Python',
+      'Programming Language :: Python :: 2',
       'Programming Language :: Python :: 3',
+      'Programming Language :: Python :: Implementation :: CPython',
+      'Programming Language :: Python :: Implementation :: PyPy',
       'Topic :: Security',
       'Topic :: Security :: Cryptography',
     ],
@@ -48,7 +51,7 @@ common = dict(
 
 try:
   import __pypy__
-  setup(modules=['streql'], package_dir={'':'pypy'}, **common)
+  setup(py_modules=['streql'], package_dir={'':'pypy'}, **common)
 except ImportError:
   try:
     from setuptools import Extension

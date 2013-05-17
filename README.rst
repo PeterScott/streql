@@ -18,4 +18,4 @@ this function takes does not depend on what specific bytes are in these strings.
 are encoded with UTF-8 before being compared. This works on both Unicode and byte
 strings, in Python 2 and 3.
 
-The module is written in C, for speed and predictability. The license is Apache 2.0.
+This works with Python 2 and 3, and PyPy. The license is Apache 2.0.
