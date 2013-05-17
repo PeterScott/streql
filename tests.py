@@ -35,7 +35,10 @@ class BytewiseEqualityTest(unittest.TestCase):
     self.assertTrue(equals(b('foo'), u('foo')))
     self.assertTrue(equals(u('foo'), b('foo')))
     self.assertTrue(equals('hello'*1000, 'hello'*1000))
-    self.assertTrue(equals(b(u'hello\xa0world'), u(u'hello\xa0world')))
+    if PYTHON3:
+      self.assertTrue(equals(bytes('hello\xa0world', 'utf8'), 'hello\xa0world'))
+    else:
+      self.assertTrue(equals('hello\xc2\xa0world', 'hello\xc2\xa0world'.decode('utf8')))
 
   def testUnequalStrings(self):
     self.assertFalse(equals(b('foo'), b('bar')))
