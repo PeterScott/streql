@@ -35,6 +35,7 @@ class BytewiseEqualityTest(unittest.TestCase):
     self.assertTrue(equals(b('foo'), u('foo')))
     self.assertTrue(equals(u('foo'), b('foo')))
     self.assertTrue(equals('hello'*1000, 'hello'*1000))
+    self.assertTrue(equals(b(u'hello\xa0world'), u(u'hello\xa0world')))
 
   def testUnequalStrings(self):
     self.assertFalse(equals(b('foo'), b('bar')))
