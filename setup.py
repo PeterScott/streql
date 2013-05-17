@@ -26,7 +26,7 @@ except ImportError:
 
 common = dict(
     name = 'streql',
-    version = '3.0',
+    version = '3.0.1',
     description = 'Constant-time string comparison',
     long_description = __doc__,
     author = 'Peter Scott',
