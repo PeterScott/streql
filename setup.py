@@ -20,12 +20,11 @@ The module is written in C, for speed and predictability. The license is Apache 
 """
 
 try:
-  from setuptools import setup, Extension
+  from setuptools import setup
 except ImportError:
   from distutils.core import setup
-  from distutils.extension import Extension
 
-setup(
+common = dict(
     name = 'streql',
     version = '2.0',
     description = 'Constant-time string comparison',
@@ -36,7 +35,6 @@ setup(
     url = 'https://github.com/PeterScott/streql',
     test_suite = 'tests',
     zip_safe = False,
-    ext_modules = [Extension("streql", ["streql.c"])],
     classifiers = [
       'Development Status :: 5 - Production/Stable',
       'License :: OSI Approved :: Apache Software License',
@@ -47,3 +45,13 @@ setup(
       'Topic :: Security :: Cryptography',
     ],
 )
+
+try:
+  import __pypy__
+  setup(modules=['streql'], package_dir={'':'pypy'}, **common)
+except ImportError:
+  try:
+    from setuptools import Extension
+  except ImportError:
+    from distutils.extension import Extension
+  setup(ext_modules = [Extension("streql", ["streql.c"])], **common)
