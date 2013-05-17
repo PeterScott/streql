@@ -12,19 +12,22 @@ found in KeyCzar back in 2009 <http://codahale.com/a-lesson-in-timing-attacks/>`
 
 This module offers a single function, ``equals(x, y)``, which takes two strings ``x`` and
 ``y`` and returns ``True`` if they are equal, and ``False`` if they are not. The time
-this function takes does not depend on what specific bytes are in these strings.
-
-Technically, this should work for any object that supports the read-only buffer
-interface, so it should also work for arrays.
+this function takes does not depend on what specific bytes are in these strings. Strings
+are encoded with UTF-8 before being compared. This works on both Unicode and byte
+strings, in Python 2 and 3.
 
 The module is written in C, for speed and predictability. The license is Apache 2.0.
 """
 
-from setuptools import setup, Extension
+try:
+  from setuptools import setup, Extension
+except ImportError:
+  from distutils.core import setup
+  from distutils.extension import Extension
 
 setup(
     name = 'streql',
-    version = '1.0',
+    version = '2.0',
     description = 'Constant-time string comparison',
     long_description = __doc__,
     author = 'Peter Scott',

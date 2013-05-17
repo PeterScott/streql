@@ -1,8 +1,28 @@
 """Tests for string comparison."""
 
 from streql import equals
-from array import array
 import unittest
+import sys
+
+PYTHON3 = sys.version_info.major == 3
+
+
+def b(s):
+  """Bytes from a string."""
+  if PYTHON3:
+    return bytes(s, 'utf8')
+  if isinstance(s, unicode):
+    return s.encode('utf8')
+  return str(s)
+
+
+def u(s):
+  """Unicode string from a string."""
+  if PYTHON3:
+    return s
+  if isinstance(s, str):
+    return s.decode('utf8')
+  return unicode(s)
 
 
 
@@ -10,25 +30,24 @@ class BytewiseEqualityTest(unittest.TestCase):
   """Test equality of some strings and arrays."""
 
   def testEqualStrings(self):
-    self.assertTrue(equals('foo', 'foo'))
+    self.assertTrue(equals(b('foo'), b('foo')))
+    self.assertTrue(equals(u('foo'), u('foo')))
+    self.assertTrue(equals(b('foo'), u('foo')))
+    self.assertTrue(equals(u('foo'), b('foo')))
     self.assertTrue(equals('hello'*1000, 'hello'*1000))
 
   def testUnequalStrings(self):
-    self.assertFalse(equals('foo', 'bar'))
-    self.assertFalse(equals('hello, world!', 'hello, world.'))
-    self.assertFalse(equals('aaa', 'aa'))
+    self.assertFalse(equals(b('foo'), b('bar')))
+    self.assertFalse(equals(u('foo'), u('bar')))
+    self.assertFalse(equals(b('hello, world!'), b('hello, world.')))
+    self.assertFalse(equals(b('aaa'), b('aa')))
+    self.assertFalse(equals(u('aaa'), u('aa')))
 
   def testWithEmptyStrings(self):
-    self.assertTrue(equals('', ''))
-    self.assertFalse(equals('a', ''))
-    self.assertFalse(equals('', 'a'))
+    self.assertTrue(equals(b(''), b('')))
+    self.assertFalse(equals(b('a'), b('')))
+    self.assertFalse(equals(b(''), b('a')))
+    self.assertTrue(equals(u(''), u('')))
+    self.assertFalse(equals(u('a'), u('')))
+    self.assertFalse(equals(u(''), u('a')))
 
-  def testWithArrays(self):
-    self.assertTrue(equals(array('c', 'hello'), array('c', 'hello')))
-    self.assertFalse(equals(array('c', 'hello'), array('c', 'world')))
-    self.assertTrue(equals(array('i', [1, 2, 3]), array('i', [1, 2, 3])))
-    self.assertFalse(equals(array('i', [1, 2, 3]), array('i', [3, 2, 1])))
-
-  def testWithBuffers(self):
-    self.assertTrue(equals(buffer('foo'), buffer('foo')))
-    self.assertFalse(equals(buffer('foo'), buffer('bar')))
