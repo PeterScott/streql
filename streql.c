@@ -13,8 +13,10 @@ static int equals_internal(const char *x, unsigned int xlen, const char *y, unsi
 static PyObject *equals(PyObject *self, PyObject *args) {
   const char *x = NULL, *y = NULL; unsigned int xlen, ylen;
   if (!PyArg_ParseTuple(args, "et#et#", "utf8", &x, &xlen, "utf8", &y, &ylen)) return NULL;
-  
-  if (equals_internal(x, xlen, y, ylen)) {
+  int equal = equals_internal(x, xlen, y, ylen);
+  PyMem_Free((void*)x); PyMem_Free((void*)y);
+
+  if (equal) {
     Py_RETURN_TRUE;
   } else {
     Py_RETURN_FALSE;
